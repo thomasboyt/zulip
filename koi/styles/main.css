@@ -9,3 +9,10 @@
 @import '../../static/styles/pygments.css';
 @import '../../static/styles/thirdparty-fonts.css';
 @import '../../static/styles/fonts.css';
+
+#koi-container {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}

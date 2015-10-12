@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getOldMessages } from '../../actions/zulip';
 
+import MessageList from '../../components/MessageList';
+
 function select(state) {
   return {
     messages: state.zulip.messages
@@ -18,22 +20,9 @@ const Index = React.createClass({
     }));
   },
 
-  renderMessages() {
-    console.log(this.props.messages);
-    return this.props.messages.map((message) => {
-      return (
-        <p key={message.id}>
-          <strong>{message.sender_full_name}</strong>: {message.content}
-        </p>
-      );
-    });
-  },
-
   render() {
     return (
-      <div>
-        {this.renderMessages()}
-      </div>
+      <MessageList messages={this.props.messages} />
     );
   }
 });
