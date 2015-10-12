@@ -299,3 +299,12 @@ if settings.DEVELOPMENT:
     urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': static_root}))
+
+    urlpatterns += patterns('',
+        url(r'^koi/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': 'koi/public'}))
+
+    urlpatterns += patterns('',
+        url(r'^koi$',
+            TemplateView.as_view(template_name='koi/index.html'), name='koi'))
+
