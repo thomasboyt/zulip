@@ -8,8 +8,11 @@ module.exports = {
     vendor: [
       'react',
       'redux',
+      'redux-thunk',
       'react-redux',
-      'react-router'
+      'react-router',
+      'whatwg-fetch',
+      'history'
     ],
   },
 

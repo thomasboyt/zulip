@@ -1,7 +1,14 @@
 import createReducer from '../utils/createReducer';
 
-const initialState = {};
+const initialState = {
+  messages: []
+};
 
-const actionHandlers = {};
+const actionHandlers = {
+  'getOldMessages:success': function(state, {messages}) {
+    state.messages = messages;
+    return state;
+  }
+};
 
 export default createReducer(initialState, actionHandlers);

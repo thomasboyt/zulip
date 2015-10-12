@@ -10,9 +10,9 @@ let history = useBasename(createBrowserHistory)({
 
 export default (
   <Router history={history}>
-    <Route path="/" component={require('../components/App')}>
-      <Route path="login" component={require('../routes/Login')} />
+    <Route path="/login" component={require('../routes/Login')} />
 
+    <Route path="/" component={require('../components/App')}>
       <IndexRoute component={require('../routes/Index')} />
     </Route>
   </Router>
