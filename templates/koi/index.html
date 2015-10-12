@@ -3,6 +3,12 @@
   <head>
     <title>Zulip (Koi)</title>
     <link href="/static/koi/app.bundle.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript">
+    {% autoescape off %}
+    var page_params = {{ page_params }};
+    {% endautoescape %}
+    </script>
   </head>
 
   <body>

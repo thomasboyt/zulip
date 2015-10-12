@@ -291,6 +291,10 @@ urlpatterns += patterns('',
 )
 
 
+urlpatterns += patterns('',
+    url(r'^koi', 'zerver.views.koi.home')
+)
+
 if settings.DEVELOPMENT:
     use_prod_static = getattr(settings, 'PIPELINE', False)
     static_root = os.path.join(settings.DEPLOY_ROOT,
@@ -300,7 +304,5 @@ if settings.DEVELOPMENT:
         url(r'^static/koi/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': 'koi/public'}),
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': static_root}),
-        url(r'^koi',
-            TemplateView.as_view(template_name='koi/index.html'), name='koi'))
+            {'document_root': static_root}))
 
