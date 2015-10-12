@@ -17,3 +17,16 @@ export function getOldMessages(opts) {
     });
   };
 }
+
+// export function getEvents() {
+//   return async function(dispatch) {
+//     const res = await authedFetch('/json/get_events', {
+//       method: 'POST',
+//       body: makeForm({
+//         dont_block: false,
+//         queue_id:
+//       })
+//     });
+//
+//   }
+// }
