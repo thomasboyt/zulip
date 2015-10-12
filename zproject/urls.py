@@ -297,14 +297,10 @@ if settings.DEVELOPMENT:
         'prod-static/serve' if use_prod_static else 'static')
 
     urlpatterns += patterns('',
+        url(r'^static/koi/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': 'koi/public'}),
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': static_root}))
-
-    urlpatterns += patterns('',
-        url(r'^koi/(?P<path>.*)$', 'django.views.static.serve',
-            {'document_root': 'koi/public'}))
-
-    urlpatterns += patterns('',
-        url(r'^koi$',
+            {'document_root': static_root}),
+        url(r'^koi',
             TemplateView.as_view(template_name='koi/index.html'), name='koi'))
 

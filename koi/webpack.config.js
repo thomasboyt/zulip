@@ -8,21 +8,22 @@ module.exports = {
     vendor: [
       'react',
       'redux',
-      'react-redux'
+      'react-redux',
+      'react-router'
     ],
   },
 
   output: {
     path: 'public/',
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
 
   resolve: {
-    root: path.resolve('./node_modules')
+    root: path.resolve('./node_modules'),
   },
 
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
+    root: path.join(__dirname, 'node_modules'),
   },
 
   plugins: [
@@ -40,12 +41,20 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           optional: ['es7.asyncFunctions', 'es7.classProperties']
-        }
+        },
       },
 
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css-loader')
+        loader: ExtractTextPlugin.extract('css-loader'),
+      },
+
+      {
+        test: /(?:\.woff|\.ttf|\.svg|\.eot)/,
+        loader: 'file-loader',
+        query: {
+          name: '/static/koi/font/[hash].[ext]'
+        }
       },
     ]
   }
