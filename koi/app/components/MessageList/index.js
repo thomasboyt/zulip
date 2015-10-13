@@ -1,6 +1,11 @@
 import React from 'react';
 import MessageBox from './MessageBox';
 
+import { HotKeys } from 'react-hotkeys';
+import { connect } from 'react-redux';
+
+import { pointerUp } from '../../actions/messageList';
+
 function contiguous(prev, next) {
   if (!prev) {
     return false;
@@ -22,6 +27,11 @@ function contiguous(prev, next) {
 }
 
 const MessageList = React.createClass({
+  handlePointerUp(e) {
+    e.preventDefault();
+    this.props.dispatch(pointerUp());
+  },
+
   renderMessages() {
     const groupedMessages = [];
 
@@ -43,8 +53,13 @@ const MessageList = React.createClass({
         const includeSender = !last || message.sender_id !== last.sender_id;
         last = message;
 
+        const isSelected = this.props.pointerId === message.id;
+
         return (
-          <MessageBox includeSender={includeSender} message={message} key={message.id} />
+          <MessageBox
+            includeSender={includeSender} message={message} key={message.id}
+            selected={isSelected}
+            />
         );
       });
 
@@ -110,14 +125,20 @@ const MessageList = React.createClass({
   },
 
   render() {
+    const handlers = {
+      pointerUp: this.handlePointerUp
+    };
+
     return (
-      <div className="message_area_padder message_list">
-        <div className="message_table focused_table">
-          {this.renderMessages()}
+      <HotKeys handlers={handlers}>
+        <div className="message_area_padder message_list">
+          <div className="message_table focused_table">
+            {this.renderMessages()}
+          </div>
         </div>
-      </div>
+      </HotKeys>
     );
   }
 });
 
-export default MessageList;
+export default connect()(MessageList);

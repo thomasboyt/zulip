@@ -1,11 +1,24 @@
 import authedFetch from '../utils/authedFetch';
 import makeForm from '../utils/makeForm';
 
-export function getOldMessages(opts) {
+import { parse as parseFilter } from '../utils/Filter';
+
+export function narrow(narrowQuery, opts) {
   return async function(dispatch) {
+    dispatch({
+      type: 'narrow',
+      narrowQuery
+    });
+
+    const queryOpts = Object.assign({}, opts);
+
+    if (narrowQuery) {
+      queryOpts['narrow'] = JSON.stringify(parseFilter(narrowQuery));
+    }
+
     const res = await authedFetch('/json/get_old_messages', {
       method: 'POST',
-      body: makeForm(opts)
+      body: makeForm(queryOpts)
     });
 
     const json = await res.json();

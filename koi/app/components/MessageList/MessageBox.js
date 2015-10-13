@@ -1,6 +1,12 @@
 import React from 'react';
 
 const MessageBox = React.createClass({
+  propTypes: {
+    message: React.PropTypes.object.isRequired,
+    includeSender: React.PropTypes.bool,
+    selected: React.PropTypes.bool,
+  },
+
   renderAvatar(url) {
     const style = {
       backgroundImage: `url('${url}&stamp=59')`
@@ -49,12 +55,17 @@ const MessageBox = React.createClass({
 
     let className = 'message_row';
 
+    // TODO: use a helper for this
     if (this.props.includeSender) {
       className += ' include-sender';
     }
 
     if (message.type === 'private') {
       className += ' private-message';
+    }
+
+    if (this.props.selected) {
+      className += ' selected_message';
     }
 
     return (
